@@ -1,14 +1,19 @@
-import pytest
+from random import randint
 
+import pytest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-from random import randint
+
+from tests.help.data import *
+from tests.help.locators import *
+from tests.help.urls import *
+
 
 @pytest.fixture
 def driver():
     chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument('--headless')
     driver = webdriver.Chrome(options=chrome_options)
     driver.implicitly_wait(5)
@@ -20,9 +25,9 @@ def new_email():
 
 @pytest.fixture
 def authorization(driver):
-    driver.get("https://stellarburgers.nomoreparties.site/login")
-    driver.find_element(By.XPATH, '//*[contains(text(),"Email")]/parent::*/input').send_keys('Евгений_Шляпкин_12_001@yandex.ru')
-    driver.find_element(By.XPATH, '//*[contains(text(),"Пароль")]/parent::*/input').send_keys('111111')
-    driver.find_element(By.XPATH, '//button[contains(text(),"Войти")]').click()
-    WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable((By.XPATH, '//button[contains(text(),"Оформить заказ")]')))
+    driver.get(login_page_link)
+    driver.find_element(*field_email).send_keys(base_email)
+    driver.find_element(*field_password).send_keys(base_password)
+    driver.find_element(*button_login).click()
+    WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable(button_place_order))
 
