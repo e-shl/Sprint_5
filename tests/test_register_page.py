@@ -16,7 +16,6 @@ def test_registration_is_successful_registration(driver,new_email, password):
     driver.find_element(*button_registration).click()
     WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable(button_login))
     assert driver.current_url == login_page_link
-    driver.quit()
 
 @pytest.mark.parametrize('password', ["1", "1234", "12345"])
 def test_registration_less6_password_is_error_message(driver,new_email, password):
@@ -28,4 +27,3 @@ def test_registration_less6_password_is_error_message(driver,new_email, password
     driver.find_element(*button_registration).click()
     error_message = driver.find_element(*text_error_password).text
     assert error_message == test_error_message
-    driver.quit()

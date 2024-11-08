@@ -17,7 +17,8 @@ def driver():
     chrome_options.add_argument('--headless')
     driver = webdriver.Chrome(options=chrome_options)
     driver.implicitly_wait(5)
-    return driver
+    yield driver
+    driver.quit()
 
 @pytest.fixture
 def new_email():

@@ -14,7 +14,7 @@ def test_authorization_from_home_is_successful_authorization(driver):
     driver.find_element(*field_password).send_keys(base_password)
     driver.find_element(*button_login).click()
     assert WebDriverWait(driver, 60).until(expected_conditions.visibility_of_element_located(button_place_order))
-    driver.quit()
+    
 
 def test_authorization_from_button_profile_is_successful_authorization(driver):
     driver.get(base_domain)
@@ -24,7 +24,7 @@ def test_authorization_from_button_profile_is_successful_authorization(driver):
     driver.find_element(*field_password).send_keys(base_password)
     driver.find_element(*button_login).click()
     assert WebDriverWait(driver, 60).until(expected_conditions.visibility_of_element_located(button_place_order))
-    driver.quit()
+    
 
 def test_authorization_from_register_is_successful_authorization(driver):
     driver.get(registration_page_link)
@@ -34,7 +34,6 @@ def test_authorization_from_register_is_successful_authorization(driver):
     driver.find_element(*field_password).send_keys(base_password)
     driver.find_element(*button_login).click()
     assert WebDriverWait(driver, 60).until(expected_conditions.visibility_of_element_located(button_place_order))
-    driver.quit()
 
 def test_authorization_from_forgot_password_is_successful_authorization(driver):
     driver.get(forgot_password_page_link)
@@ -44,4 +43,3 @@ def test_authorization_from_forgot_password_is_successful_authorization(driver):
     driver.find_element(*field_password).send_keys(base_password)
     driver.find_element(*button_login).click()
     assert WebDriverWait(driver, 60).until(expected_conditions.visibility_of_element_located(button_place_order))
-    driver.quit()
